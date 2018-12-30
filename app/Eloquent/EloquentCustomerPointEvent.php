@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $created_at
  */
 
-final class EloquentCustomerPointEvent extends Model
+class EloquentCustomerPointEvent extends Model
 {
     protected $table = 'customer_point_events';
     // 自動設定されるタイムスタンプは不要
