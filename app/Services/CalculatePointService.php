@@ -17,7 +17,7 @@ final class CalculatePointService
      * @return int
      * @throws PreConditionException
      */
-    public function calcPoint(int $amount): int
+    public static function calcPoint(int $amount): int
     {
         if ($amount < 0) {
             throw new PreConditionException('購入金額が負の数');
