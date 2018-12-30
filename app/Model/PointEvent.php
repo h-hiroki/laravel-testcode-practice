@@ -1,0 +1,71 @@
+<?php
+declare(strict_types=1);
+
+namespace App\Model;
+
+use Carbon\Carbon;
+
+final class PointEvent
+{
+    /** @var int */
+    private $customerId;
+
+    /** @var int */
+    private $event;
+
+    /** @var int */
+    private $point;
+
+    /** @var int */
+    private $createdAt;
+
+    /**
+     * @param int $customerId
+     * @param strint $event
+     * @param int $point
+     * @param Carbon $createdAt
+     */
+    public function __construct(
+        int $customerId,
+        string $event,
+        int $point,
+        Carbon $createdAt
+    ) {
+        $this->customerId = $customerId;
+        $this->event = $event;
+        $this->point = $point;
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCustomerId(): int
+    {
+        return $this->customerId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEvent(): string
+    {
+        return $this->event;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPoint(): int
+    {
+        return $this->point;
+    }
+
+    /**
+     * @return Carbon
+     */
+    public function getCreatedAt(): Carbon
+    {
+        return $this->createdAt->copy();
+    }
+}
