@@ -60,4 +60,12 @@ final class PointEvent
     {
         return $this->point;
     }
+
+    /**
+     * @return Carbon
+     */
+    public function getCreatedAt(): Carbon
+    {
+        return $this->createdAt->copy();
+    }
 }
