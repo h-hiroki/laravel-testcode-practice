@@ -31,4 +31,64 @@ class CalculatePointServiceTest extends TestCase
         $result = CalculatePointService::calcPoint($amount);
         $this->assertSame($expected, $result);
     }
+
+    /**
+     * @test
+     * @expectedException \App\Exceptions\PreConditionException
+     * @expectedExceptionMessage 購入金額が負の数
+     */
+    public function calcPoint_購入金額が負の数なら例外をスロー()
+    {
+        CalculatePointService::calcPoint(-1);
+    }
+
+
+    // 以下はいくつかの例外をテストする場合の書き方。参考にしてね。
+
+    /**
+     * try/catchを使った例外テスト
+     * @test
+     */
+    public function exception_try_catch()
+    {
+        try {
+            throw new \InvalidArgumentException('message', 200);
+            $this->fail(); // 例外がスローされていない場合はテストを失敗させる
+        } catch (\Throwable $e){
+            // 指定した例外クラスがスローされているか
+            $this->assertInstanceOf(\InvalidArgumentException::class, $e);
+            // スローされた例外のコードを検証
+            $this->assertSame(200, $e->getCode());
+            // スローされた例外のメッセージを検証
+            $this->assertSame('message', $e->getMessage());
+        }
+    }
+
+    /**
+     * expectExceptionメソッドを使った例外テスト
+     * @test
+     */
+    public function exception_expectException_method()
+    {
+        // 指定した例外クラスがスローされているか
+        $this->expectException(\InvalidArgumentException::class);
+        // スローされた例外のコードを検証
+        $this->expectExceptionCode(200);
+        // スローされた例外のメッセージを検証
+        $this->expectExceptionMessage('message');
+
+        throw new \InvalidArgumentException('message', 200);
+    }
+
+    /**
+     * expectedExceptionアノテーションを使った例外テスト
+     * @test
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionCode 200
+     * @expectedExceptionMessage message
+     */
+    public function exception_expectedException_annotation()
+    {
+        throw new \InvalidArgumentException('message', 200);
+    }
 }
