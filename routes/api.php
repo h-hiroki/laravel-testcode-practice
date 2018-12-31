@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Actions\AddPointAction;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/ping', function() {
     return response()->json(['message' => 'pong']);
 });
+
+Route::put('/customers/add_point', AddPointAction::class);

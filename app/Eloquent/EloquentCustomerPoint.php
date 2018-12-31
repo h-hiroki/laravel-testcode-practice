@@ -30,4 +30,15 @@ class EloquentCustomerPoint extends Model
                 ]
             ) === 1;
     }
+
+    /**
+     * @param int $customerId
+     * @return int
+     */
+    public function findPoint(int $customerId): int
+    {
+        $customerPoint = $this->where('customer_id', $customerId)->firstOrFail();
+
+        return $customerPoint->point;
+    }
 }

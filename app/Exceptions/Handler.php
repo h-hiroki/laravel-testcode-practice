@@ -48,6 +48,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        // PreConditionExceptionスロー時のレスポンス
+        if ($exception instanceof PreConditionException) {
+            return response()->json(
+                ['message' => trans($exception->getMessage())],
+                Res::HTTP_BAD_REQUEST
+            );
+        }
+
         return parent::render($request, $exception);
     }
 }
