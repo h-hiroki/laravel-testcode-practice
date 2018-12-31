@@ -106,4 +106,22 @@ class AddPointTest extends TestCase
         ];
         $response->assertJson($expected);
     }
+
+    /**
+     * @test
+     */
+    public function put_add_point_バリデーションエラー_キーのみ検証()
+    {
+        $response = $this->putJson('/api/customers/add_point', []);
+
+        $response->assertStatus(422);
+
+        // レスポンスボディJSONを配列に変換して検証
+        $jsonValues = $response->json();
+        $this->assertArrayHasKey('errors', $jsonValues);
+
+        $errors = $jsonValues['errors'];
+        $this->assertArrayHasKey('customer_id', $errors);
+        $this->assertArrayHasKey('add_point', $errors);
+    }
 }
