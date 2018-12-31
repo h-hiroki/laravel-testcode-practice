@@ -7,8 +7,8 @@ use App\Eloquent\EloquentCustomer;
 use App\Eloquent\EloquentCustomerPoint;
 use App\Exceptions\PreConditionException;
 use App\Model\PointEvent;
-use App\Service\AddPointService;
-use Illminate\Support\Carbon;
+use App\Services\AddPointService;
+use Illuminate\Support\Carbon;
 
 final class AddPointUseCase
 {

@@ -5,8 +5,8 @@ namespace App\Http\Actions;
 
 use App\Http\Requests\AddPointRequest;
 use App\UseCases\AddPointUseCase;
-use Illminate\Http\JsonResponse;
-use Illminate\Support\Carbon;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Carbon;
 
 class AddPointAction
 {
@@ -30,7 +30,7 @@ class AddPointAction
     {
         // JSONからパラメタ取得
         $customerId = filter_var($request->json('customer_id'), FILTER_VALIDATE_INT);
-        $addPoint = filter_var($request->json('add_point', FILTER_VALIDATE_INT));
+        $addPoint = filter_var($request->json('add_point'), FILTER_VALIDATE_INT);
 
         // ポイント加算ユースケース実行
         $customerPoint = $this->useCase->run(
