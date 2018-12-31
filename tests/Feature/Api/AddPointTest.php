@@ -83,4 +83,27 @@ class AddPointTest extends TestCase
         ];
         $response->assertExactJson($expected);
     }
+
+    /**
+     * @test
+     */
+    public function put_add_point_バリデーションエラー_errorsのみ検証()
+    {
+        $response = $this->putJson('/api/customers/add_point', []);
+
+        $response->assertStatus(422);
+
+        // errorキーのみ検証
+        $expected = [
+            'errors'  => [
+                'customer_id' => [
+                    'The customer id field is required.',
+                ],
+                'add_point' => [
+                    'The add point field is required.',
+                ],
+            ],
+        ];
+        $response->assertJson($expected);
+    }
 }
