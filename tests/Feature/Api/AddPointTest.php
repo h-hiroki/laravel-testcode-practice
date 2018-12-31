@@ -124,4 +124,49 @@ class AddPointTest extends TestCase
         $this->assertArrayHasKey('customer_id', $errors);
         $this->assertArrayHasKey('add_point', $errors);
     }
+
+    public function dataProvider_put_add_point_add_point事前条件エラー()
+    {
+        return [
+            [0],
+            [-1],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider dataProvider_put_add_point_add_point事前条件エラー
+     */
+    public function put_add_point_add_point事前条件エラー(int $addPoint)
+    {
+        $response = $this->putJson('/api/customers/add_point', [
+            'customer_id' => self::CUSTOMER_ID,
+            'add_point'   => $addPoint,
+        ]);
+
+        // HTTPレスポンスアサーション
+        $response->assertStatus(400);
+        $expected = [
+            'message' => 'add_point should be equals or greater than 1',
+        ];
+        $response->assertExactJson($expected);
+    }
+
+    /**
+     * @test
+     */
+    public function put_add_point_customer_id事前条件エラー()
+    {
+        $response = $this->putJson('/api/customers/add_point', [
+            'customer_id' => 999, // 存在しないcustomer_id
+            'add_point'   => 10,
+        ]);
+
+        // HTTPレスポンスアサーション
+        $response->assertStatus(400);
+        $expected = [
+            'message' => 'customer_id:999 does not exists',
+        ];
+        $response->assertExactJson($expected);
+    }
 }

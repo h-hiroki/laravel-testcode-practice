@@ -52,7 +52,7 @@ final class AddPointUseCase
         }
 
         if (!$this->eloquentCustomer->where('id', $customerId)->exists()) {
-            $message = sprintf('customer_id:%d dose not exists', $customerId);
+            $message = sprintf('customer_id:%d does not exists', $customerId);
             throw new PreConditionException($message);
         }
 
